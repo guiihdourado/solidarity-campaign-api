@@ -14,4 +14,3 @@ usersRouter.post('/', usersController.create);
 usersRouter.put('/:user_id', usersController.update);
 
 export default usersRouter;
-

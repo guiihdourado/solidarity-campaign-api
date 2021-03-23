@@ -1,5 +1,3 @@
-import { sign } from 'jsonwebtoken';
-import authConfig from '@config/auth';
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
@@ -15,16 +13,14 @@ interface IRequest {
 class ListUserService {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
+    private usersRepository: IUsersRepository
   ) {}
 
   public async execute({ id }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(id);
 
     if (!user) {
-      throw new AppError(
-        'Usuário não encontrado.',
-      );
+      throw new AppError('Usuário não encontrado.');
     }
 
     return user;

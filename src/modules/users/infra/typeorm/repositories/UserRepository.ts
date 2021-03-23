@@ -1,9 +1,9 @@
 import { getRepository, Repository } from 'typeorm';
 
-import User from '../entities/User';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import IUpdateUserDTO from '@modules/users/dtos/IUpdateUserDTO';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import User from '../entities/User';
 
 class UsersRepository implements IUsersRepository {
   private ormRepository: Repository<User>;
@@ -40,12 +40,12 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  public async update(id:string, data: IUpdateUserDTO): Promise<User> {
+  public async update(id: string, data: IUpdateUserDTO): Promise<User> {
     const user = await this.findById(id);
 
     const userUpdated = await this.ormRepository.save({
       ...user,
-      ...data,
+      ...data
     });
 
     return userUpdated;

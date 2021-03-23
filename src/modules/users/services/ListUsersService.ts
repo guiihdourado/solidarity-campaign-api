@@ -7,7 +7,7 @@ import IUsersRepository from '../repositories/IUsersRepository';
 class ListUsersService {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
+    private usersRepository: IUsersRepository
   ) {}
 
   public async execute(): Promise<User[]> {

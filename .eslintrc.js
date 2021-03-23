@@ -23,6 +23,7 @@ module.exports = {
     "prettier",
   ],
   "rules": {
+    "no-useless-constructor": "off",
     "no-use-before-define": "off",
     "prettier/prettier": "error",
     "no-underscore-dangle": "off",
