@@ -5,12 +5,12 @@ import {
   TableForeignKey
 } from 'typeorm';
 
-export default class CreateBasicBasketsPrices1607291222375
+export class CreateProductsCampaigns1616554799890
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'basic_baskets_prices',
+        name: 'products_campaigns',
         columns: [
           {
             name: 'id',
@@ -20,23 +20,11 @@ export default class CreateBasicBasketsPrices1607291222375
             default: 'uuid_generate_v4()'
           },
           {
-            name: 'price',
-            type: 'float'
-          },
-          {
-            name: 'place_name',
-            type: 'varchar'
-          },
-          {
-            name: 'place_localization',
-            type: 'varchar'
-          },
-          {
-            name: 'campaign_id',
+            name: 'product_id',
             type: 'uuid'
           },
           {
-            name: 'user_id',
+            name: 'campaign_id',
             type: 'uuid'
           },
           {
@@ -54,9 +42,21 @@ export default class CreateBasicBasketsPrices1607291222375
     );
 
     await queryRunner.createForeignKey(
-      'basic_baskets_prices',
+      'products_campaigns',
       new TableForeignKey({
-        name: 'BasicBasketPriceCampaign',
+        name: 'ProductsCampaignsProduct',
+        columnNames: ['product_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'products',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
+    );
+
+    await queryRunner.createForeignKey(
+      'products_campaigns',
+      new TableForeignKey({
+        name: 'ProductsCampaignsCampaign',
         columnNames: ['campaign_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'campaigns',
@@ -64,21 +64,9 @@ export default class CreateBasicBasketsPrices1607291222375
         onUpdate: 'CASCADE'
       })
     );
-
-    await queryRunner.createForeignKey(
-      'basic_baskets_prices',
-      new TableForeignKey({
-        name: 'BasicBasketPriceUser',
-        columnNames: ['user_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'users',
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE'
-      })
-    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('basic_baskets_prices');
+    await queryRunner.dropTable('products_campaigns');
   }
 }
