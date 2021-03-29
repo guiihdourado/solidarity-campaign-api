@@ -36,7 +36,14 @@ class FakeUsersRepository implements IUsersRepository {
   }
 
   public async update(id: string, dataToUpdate: IUpdateUserDTO): Promise<User> {
-    return new User();
+    const findIndex = this.users.findIndex(findUser => findUser.id === id);
+
+    this.users[findIndex] = {
+      ...this.users[findIndex],
+      ...dataToUpdate
+    };
+
+    return this.users[findIndex];
   }
 }
 

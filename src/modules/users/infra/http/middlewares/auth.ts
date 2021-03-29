@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 
+import authConfig from '@config/auth';
 import AppError from '@shared/errors/AppError';
 
 interface ITokenPayload {
@@ -12,7 +13,7 @@ interface ITokenPayload {
 
 export default function auth(
   request: Request,
-  response: Response,
+  _: Response,
   next: NextFunction
 ): void {
   const authHeader = request.headers.authorization;
@@ -24,7 +25,8 @@ export default function auth(
   const [, token] = authHeader.split(' ');
 
   try {
-    const decoded = verify(token, 'happy-campaigns');
+    const { secret } = authConfig.jwt;
+    const decoded = verify(token, secret);
 
     const { sub, role } = decoded as ITokenPayload;
 
@@ -34,7 +36,7 @@ export default function auth(
     };
 
     return next();
-  } catch {
+  } catch (error) {
     throw new AppError('Invalid JWT token', 401);
   }
 }

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import ListUserService from '@modules/users/services/ListUserService';
+import ShowUserService from '@modules/users/services/ShowUserService';
 import ListUsersService from '@modules/users/services/ListUsersService';
 import CreateUserService from '@modules/users/services/CreateUserService';
 import UpdateUserService from '@modules/users/services/UpdateUserService';
@@ -18,9 +18,9 @@ export default class UsersController {
   public async show(request: Request, response: Response): Promise<Response> {
     const { user_id: userId } = request.params;
 
-    const listUser = container.resolve(ListUserService);
+    const showUser = container.resolve(ShowUserService);
 
-    const user = await listUser.execute({ id: userId });
+    const user = await showUser.execute({ id: userId });
 
     return response.json(user);
   }
