@@ -3,8 +3,11 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from 'typeorm';
+
+import ProductCampaign from '../../../../products/infra/typeorm/entities/ProductCampaign';
 
 @Entity('campaigns')
 class Campaign {
@@ -25,6 +28,9 @@ class Campaign {
 
   @Column('decimal', { precision: 5, scale: 2 })
   available_value: number;
+
+  @OneToMany(() => ProductCampaign, productCampaign => productCampaign.campaign)
+  public productsCampaigns!: ProductCampaign[];
 
   @CreateDateColumn()
   created_at: Date;
