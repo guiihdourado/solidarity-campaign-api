@@ -39,4 +39,4 @@ valor de cada produto que está cadastrado na campanha.
 **Regras de Negócio**
 
 - O usuário não pode cadastrar uma cotação de um produto que não foi vinculado
-a essa campanha.`
+a essa campanha.
