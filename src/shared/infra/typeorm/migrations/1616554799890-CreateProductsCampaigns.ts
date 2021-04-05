@@ -28,6 +28,11 @@ export class CreateProductsCampaigns1616554799890
             type: 'uuid'
           },
           {
+            name: 'quantity_we_have',
+            type: 'integer',
+            default: 0
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()'
