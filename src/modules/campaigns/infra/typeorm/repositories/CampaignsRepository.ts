@@ -2,6 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 
 import ICampaignsRepository from '@modules/campaigns/repositories/ICampaignsRepository';
 import ICreateCampaignDTO from '@modules/campaigns/dtos/ICreateCampaignDTO';
+import IUpdateCampaignStatusDTO from '@modules/campaigns/dtos/IUpdateCampaignStatusDTO';
 import Campaign from '../entities/Campaign';
 
 class CampaignsRepository implements ICampaignsRepository {
@@ -34,6 +35,20 @@ class CampaignsRepository implements ICampaignsRepository {
     await this.ormRepository.save(campaign);
 
     return campaign;
+  }
+
+  public async updateOnlyStatus({
+    campaign_id,
+    is_open
+  }: IUpdateCampaignStatusDTO): Promise<Campaign> {
+    const campaign = await this.findById(campaign_id);
+
+    const campaignResponse = await this.ormRepository.save({
+      ...campaign,
+      is_open: !campaign?.is_open
+    });
+
+    return campaignResponse;
   }
 }
 
