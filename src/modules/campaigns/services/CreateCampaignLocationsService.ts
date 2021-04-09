@@ -11,13 +11,11 @@ class CreateCampaignLocationsService {
   ) {}
 
   public async execute({
-    user_id,
     campaign_id,
     locations
   }: ICreateCampaignLocationsDTO): Promise<void> {
     const locationsMap = locations.map(location => ({
       ...location,
-      user_id,
       campaign_id
     }));
 

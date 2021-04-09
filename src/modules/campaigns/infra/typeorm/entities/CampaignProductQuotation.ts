@@ -11,7 +11,6 @@ import {
 
 import CampaignProduct from './CampaignProduct';
 import User from '../../../../users/infra/typeorm/entities/User';
-import Location from '../../../../locations/infra/typeorm/entities/Location';
 
 @Entity('campaigns_products_quotations')
 class CampaignProductQuotation {
@@ -25,7 +24,7 @@ class CampaignProductQuotation {
   user_id: string;
 
   @Column()
-  location_id: string;
+  campaign_location_id: string;
 
   @Column()
   quoted_price: number;
@@ -40,10 +39,6 @@ class CampaignProductQuotation {
   @ManyToOne(() => User, user => user.campaignsProductsQuotations)
   @JoinColumn({ name: 'user_id' })
   user: User;
-
-  @ManyToOne(() => Location)
-  @JoinColumn({ name: 'location_id' })
-  location: Location;
 
   @CreateDateColumn()
   created_at: Date;

@@ -27,15 +27,15 @@ class CampaignLocation {
   user_id: string;
 
   @OneToOne(() => Location)
-  @JoinColumn()
+  @JoinColumn({ name: 'location_id' })
   location: Location;
 
   @OneToOne(() => Campaign)
-  @JoinColumn()
+  @JoinColumn({ name: 'campaign_id' })
   campaign: Campaign;
 
   @OneToOne(() => User)
-  @JoinColumn()
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @CreateDateColumn()

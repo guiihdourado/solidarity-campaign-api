@@ -21,7 +21,7 @@ class CampaignsRepository implements ICampaignsRepository {
   public async findById(id: string): Promise<Campaign | undefined> {
     const campaign = await this.ormRepository.findOneOrFail({
       where: { id },
-      relations: ['campaignsProducts']
+      relations: ['campaignsProducts', 'campaignsLocations']
     });
 
     return campaign;

@@ -1,9 +1,4 @@
-import {
-  MigrationInterface,
-  QueryRunner,
-  Table,
-  TableForeignKey
-} from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateLocations1617765209016 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -17,14 +12,6 @@ export class CreateLocations1617765209016 implements MigrationInterface {
             isPrimary: true,
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()'
-          },
-          {
-            name: 'user_id',
-            type: 'uuid'
-          },
-          {
-            name: 'campaign_id',
-            type: 'uuid'
           },
           {
             name: 'place_name',
@@ -45,30 +32,6 @@ export class CreateLocations1617765209016 implements MigrationInterface {
             default: 'now()'
           }
         ]
-      })
-    );
-
-    await queryRunner.createForeignKey(
-      'locations',
-      new TableForeignKey({
-        name: 'LocationsUser',
-        columnNames: ['user_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'users',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-      })
-    );
-
-    await queryRunner.createForeignKey(
-      'locations',
-      new TableForeignKey({
-        name: 'LocationsCampaign',
-        columnNames: ['campaign_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'campaigns',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
       })
     );
   }

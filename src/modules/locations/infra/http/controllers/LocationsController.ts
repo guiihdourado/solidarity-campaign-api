@@ -1,69 +1,71 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import ListProductsService from '@modules/products/services/ListProductsService';
-import ShowProductService from '@modules/products/services/ShowProductService';
-import CreateProductService from '@modules/products/services/CreateProductService';
-import UpdateProductService from '@modules/products/services/UpdateProductService';
-import DeleteProductService from '@modules/products/services/DeleteProductService';
+import ListLocationsService from '@modules/locations/services/ListLocationsService';
+import ShowLocationService from '@modules/locations/services/ShowLocationService';
+import CreateLocationService from '@modules/locations/services/CreateLocationService';
+import UpdateLocationService from '@modules/locations/services/UpdateLocationService';
+import DeleteLocationService from '@modules/locations/services/DeleteLocationService';
 
 export default class LocationsController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const listProducts = container.resolve(ListProductsService);
+    const listLocations = container.resolve(ListLocationsService);
 
-    const products = await listProducts.execute();
+    const locations = await listLocations.execute();
 
-    return response.json(products);
+    return response.json(locations);
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
-    const { product_id: productId } = request.params;
+    const { location_id: locationId } = request.params;
 
-    const showProduct = container.resolve(ShowProductService);
+    const showLocation = container.resolve(ShowLocationService);
 
-    const product = await showProduct.execute({ id: productId });
+    const location = await showLocation.execute({ id: locationId });
 
-    return response.json(product);
+    return response.json(location);
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name } = request.body;
+    const { place_name, place_localization } = request.body;
 
-    const createProduct = await container.resolve(CreateProductService);
+    const createLocation = await container.resolve(CreateLocationService);
 
-    const product = await createProduct.execute({
-      name
+    const location = await createLocation.execute({
+      place_name,
+      place_localization
     });
 
-    return response.json(product);
+    return response.json(location);
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { id: productId } = request.params;
-    const { name } = request.body;
+    const { id: locationId } = request.params;
+    const { place_name, place_localization } = request.body;
 
-    const updateProduct = await container.resolve(UpdateProductService);
+    const updateLocation = await container.resolve(UpdateLocationService);
 
-    const product = await updateProduct.execute({
-      id: productId,
+    const location = await updateLocation.execute({
+      id: locationId,
       data: {
-        name
+        place_name,
+        place_localization
       }
     });
 
-    return response.json(product);
+    return response.json(location);
   }
 
   public async destroy(
     request: Request,
     response: Response
   ): Promise<Response> {
-    const { id: productId } = request.params;
+    const { id: locationId } = request.params;
 
-    const deleteProduct = await container.resolve(DeleteProductService);
+    const deleteLocation = await container.resolve(DeleteLocationService);
 
-    const responseDeleteProduct = await deleteProduct.execute(productId);
+    const responseDeleteLocation = await deleteLocation.execute(locationId);
 
-    return response.json(responseDeleteProduct);
+    return response.json(responseDeleteLocation);
   }
 }

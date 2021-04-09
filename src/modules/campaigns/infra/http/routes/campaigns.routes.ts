@@ -23,7 +23,7 @@ campaignsRouter.patch(
 );
 
 campaignsRouter.post(
-  '/:campaign_id/quotations',
+  '/:campaign_location_id/quotations',
   campaignsProductsQuotationsController.create
 );
 

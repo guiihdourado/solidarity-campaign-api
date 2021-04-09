@@ -5,6 +5,6 @@ interface Product {
 
 export default interface ICreateCampaignProductQuotationDTO {
   user_id: string;
-  campaign_id: string;
+  campaign_location_id: string;
   products: Product[];
 }

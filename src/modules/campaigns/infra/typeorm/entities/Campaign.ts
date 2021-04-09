@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 
 import CampaignProduct from './CampaignProduct';
+import CampaignLocation from './CampaignLocation';
 
 @Entity('campaigns')
 class Campaign {
@@ -31,6 +32,12 @@ class Campaign {
 
   @OneToMany(() => CampaignProduct, campaignProduct => campaignProduct.campaign)
   campaignsProducts: CampaignProduct[];
+
+  @OneToMany(
+    () => CampaignLocation,
+    campaignLocation => campaignLocation.campaign
+  )
+  campaignsLocations: CampaignLocation[];
 
   @CreateDateColumn()
   created_at: Date;
