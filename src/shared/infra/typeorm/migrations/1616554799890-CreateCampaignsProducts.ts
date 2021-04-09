@@ -5,12 +5,12 @@ import {
   TableForeignKey
 } from 'typeorm';
 
-export class CreateProductsCampaigns1616554799890
+export class CreateCampaignsProducts1616554799890
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'products_campaigns',
+        name: 'campaigns_products',
         columns: [
           {
             name: 'id',
@@ -47,9 +47,9 @@ export class CreateProductsCampaigns1616554799890
     );
 
     await queryRunner.createForeignKey(
-      'products_campaigns',
+      'campaigns_products',
       new TableForeignKey({
-        name: 'ProductsCampaignsProduct',
+        name: 'CampaignsProductsProduct',
         columnNames: ['product_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'products',
@@ -59,9 +59,9 @@ export class CreateProductsCampaigns1616554799890
     );
 
     await queryRunner.createForeignKey(
-      'products_campaigns',
+      'campaigns_products',
       new TableForeignKey({
-        name: 'ProductsCampaignsCampaign',
+        name: 'CampaignsProductsCampaign',
         columnNames: ['campaign_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'campaigns',
@@ -72,6 +72,6 @@ export class CreateProductsCampaigns1616554799890
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('products_campaigns');
+    await queryRunner.dropTable('campaigns_products');
   }
 }

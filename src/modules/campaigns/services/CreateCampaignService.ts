@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 import IProductsRepository from '@modules/products/repositories/IProductsRepository';
-import IProductsCampaignsRepository from '@modules/products/repositories/IProductsCampaignsRepository';
+import ICampaignsProductsRepository from '@modules/campaigns/repositories/ICampaignsProductsRepository';
 
 import ICreateCampaignDTO from '../dtos/ICreateCampaignDTO';
 import Campaign from '../infra/typeorm/entities/Campaign';
@@ -13,8 +13,8 @@ class CreateCampaignService {
     private campaignsRepository: ICampaignsRepository,
     @inject('ProductsRepository')
     private productsRepository: IProductsRepository,
-    @inject('ProductsCampaignsRepository')
-    private productsCampaignsRepository: IProductsCampaignsRepository
+    @inject('CampaignsProductsRepository')
+    private campaignsProductsRepository: ICampaignsProductsRepository
   ) {}
 
   public async execute({
@@ -26,7 +26,7 @@ class CreateCampaignService {
     });
 
     const promises = products.map(async product => {
-      const findProductCampaign = await this.productsCampaignsRepository.findByCampaignIdAndProductId(
+      const findProductCampaign = await this.campaignsProductsRepository.findByCampaignIdAndProductId(
         {
           product_id: product.id,
           campaign_id: campaign.id
@@ -40,7 +40,7 @@ class CreateCampaignService {
       const findProduct = await this.productsRepository.findById(product.id);
 
       if (findProduct) {
-        await this.productsCampaignsRepository.create({
+        await this.campaignsProductsRepository.create({
           quantity_we_have: product.quantity_we_have,
           product: findProduct,
           campaign

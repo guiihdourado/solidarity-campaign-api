@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany
 } from 'typeorm';
-import ProductCampaign from './ProductCampaign';
+import CampaignProduct from '../../../../campaigns/infra/typeorm/entities/CampaignProduct';
 
 @Entity('products')
 class Product {
@@ -16,8 +16,8 @@ class Product {
   @Column()
   name: string;
 
-  @OneToMany(() => ProductCampaign, productCampaign => productCampaign.product)
-  productsCampaigns: ProductCampaign[];
+  @OneToMany(() => CampaignProduct, campaignProduct => campaignProduct.product)
+  campaignsProducts: CampaignProduct[];
 
   @CreateDateColumn()
   created_at: Date;

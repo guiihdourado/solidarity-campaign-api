@@ -7,7 +7,7 @@ import {
   OneToMany
 } from 'typeorm';
 
-import ProductCampaign from '../../../../products/infra/typeorm/entities/ProductCampaign';
+import CampaignProduct from './CampaignProduct';
 
 @Entity('campaigns')
 class Campaign {
@@ -29,8 +29,8 @@ class Campaign {
   @Column('decimal', { precision: 5, scale: 2 })
   available_value: number;
 
-  @OneToMany(() => ProductCampaign, productCampaign => productCampaign.campaign)
-  productsCampaigns: ProductCampaign[];
+  @OneToMany(() => CampaignProduct, campaignProduct => campaignProduct.campaign)
+  campaignsProducts: CampaignProduct[];
 
   @CreateDateColumn()
   created_at: Date;

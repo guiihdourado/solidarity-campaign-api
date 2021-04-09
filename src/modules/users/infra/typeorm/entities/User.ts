@@ -3,8 +3,11 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from 'typeorm';
+
+import CampaignProductQuotation from '../../../../campaigns/infra/typeorm/entities/CampaignProductQuotation';
 
 export type UserRoleType = 'admin' | 'user';
 
@@ -21,6 +24,12 @@ class User {
 
   @Column({ type: 'enum', enum: ['admin', 'user'] })
   role: UserRoleType;
+
+  @OneToMany(
+    () => CampaignProductQuotation,
+    campaignProductQuotation => campaignProductQuotation.user
+  )
+  campaignsProductsQuotations: CampaignProductQuotation;
 
   @CreateDateColumn()
   created_at: Date;
