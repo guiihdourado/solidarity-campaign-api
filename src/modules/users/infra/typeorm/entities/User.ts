@@ -10,7 +10,6 @@ import {
 import CampaignProductQuotation from '../../../../campaigns/infra/typeorm/entities/CampaignProductQuotation';
 
 export type UserRoleType = 'admin' | 'user';
-
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')

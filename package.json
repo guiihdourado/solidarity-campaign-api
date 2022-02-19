@@ -12,6 +12,8 @@
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev typeorm/cli.js",
+    "migration:run": "yarn typeorm migration:run",
+    "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed",
     "postinstall": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "test": "jest"
   },
@@ -27,6 +29,7 @@
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.4.0",
     "typeorm": "^0.2.29",
+    "typeorm-seeding": "^1.6.1",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.5"
   },
