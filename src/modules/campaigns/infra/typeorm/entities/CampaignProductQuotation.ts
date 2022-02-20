@@ -24,9 +24,6 @@ class CampaignProductQuotation {
   user_id: string;
 
   @Column()
-  campaign_location_id: string;
-
-  @Column()
   quoted_price: number;
 
   @OneToOne(

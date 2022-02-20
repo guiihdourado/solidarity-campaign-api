@@ -8,7 +8,6 @@ import {
 } from 'typeorm';
 
 import CampaignProduct from './CampaignProduct';
-import CampaignLocation from './CampaignLocation';
 
 @Entity('campaigns')
 class Campaign {
@@ -18,12 +17,6 @@ class Campaign {
   @Column()
   name: string;
 
-  @Column()
-  begin_date: Date;
-
-  @Column()
-  end_date: Date;
-
   @Column({ default: false })
   is_open: boolean;
 
@@ -32,12 +25,6 @@ class Campaign {
 
   @OneToMany(() => CampaignProduct, campaignProduct => campaignProduct.campaign)
   campaignsProducts: CampaignProduct[];
-
-  @OneToMany(
-    () => CampaignLocation,
-    campaignLocation => campaignLocation.campaign
-  )
-  campaignsLocations: CampaignLocation[];
 
   @CreateDateColumn()
   created_at: Date;

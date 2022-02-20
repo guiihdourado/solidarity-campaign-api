@@ -12,13 +12,11 @@ class CreateCampaignProductQuotationService {
 
   public async execute({
     user_id,
-    campaign_location_id,
     products
   }: ICreateCampaignProductQuotationDTO): Promise<void> {
     const productsMap = products.map(product => ({
       ...product,
-      user_id,
-      campaign_location_id
+      user_id
     }));
 
     await this.campaignsProductsQuotationsRepository.create({

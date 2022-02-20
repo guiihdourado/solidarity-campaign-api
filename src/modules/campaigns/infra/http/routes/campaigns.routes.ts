@@ -4,13 +4,11 @@ import authMiddleware from '@modules/users/infra/http/middlewares/auth';
 import CampaignsController from '../controllers/CampaignsController';
 import CampaignsStatusController from '../controllers/CampaignsStatusController';
 import CampaignsProductsQuotationsController from '../controllers/CampaignsProductsQuotationsController';
-import CampaignsLocationsController from '../controllers/CampaignsLocationsController';
 
 const campaignsRouter = Router();
 const campaignsController = new CampaignsController();
 const campaignsStatusController = new CampaignsStatusController();
 const campaignsProductsQuotationsController = new CampaignsProductsQuotationsController();
-const campaignsLocationsController = new CampaignsLocationsController();
 
 campaignsRouter.use(authMiddleware);
 
@@ -25,11 +23,6 @@ campaignsRouter.patch(
 campaignsRouter.post(
   '/:campaign_location_id/quotations',
   campaignsProductsQuotationsController.create
-);
-
-campaignsRouter.post(
-  '/:campaign_id/locations',
-  campaignsLocationsController.create
 );
 
 export default campaignsRouter;
