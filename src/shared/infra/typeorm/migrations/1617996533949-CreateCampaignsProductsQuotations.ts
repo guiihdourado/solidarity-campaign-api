@@ -28,10 +28,6 @@ export class CreateCampaignsProductsQuotations1617996533949
             type: 'uuid'
           },
           {
-            name: 'campaign_location_id',
-            type: 'uuid'
-          },
-          {
             name: 'quoted_price',
             type: 'float'
           },
@@ -68,18 +64,6 @@ export class CreateCampaignsProductsQuotations1617996533949
         columnNames: ['user_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE'
-      })
-    );
-
-    await queryRunner.createForeignKey(
-      'campaigns_products_quotations',
-      new TableForeignKey({
-        name: 'CampaignsProductsQuotationsCampaignLocation',
-        columnNames: ['campaign_location_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'campaigns_locations',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE'
       })
