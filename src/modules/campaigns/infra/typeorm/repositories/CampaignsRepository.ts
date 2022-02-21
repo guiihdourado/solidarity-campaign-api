@@ -38,8 +38,7 @@ class CampaignsRepository implements ICampaignsRepository {
   }
 
   public async updateOnlyStatus({
-    campaign_id,
-    is_open
+    campaign_id
   }: IUpdateCampaignStatusDTO): Promise<Campaign> {
     const campaign = await this.findById(campaign_id);
 

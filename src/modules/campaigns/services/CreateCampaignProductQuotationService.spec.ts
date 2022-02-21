@@ -9,7 +9,7 @@ const spy = jest.spyOn(
   'execute'
 );
 
-describe('createCampaignProductQuotation', () => {
+describe('CreateCampaignProductQuotation', () => {
   beforeEach(() => {
     fakeCampaignsProductsQuotationsRepository = new FakeCampaignsProductsQuotationsRepository();
     createCampaignProductQuotation = new CreateCampaignProductQuotationService(
