@@ -26,17 +26,6 @@ class CreateCampaignService {
     });
 
     const promises = products.map(async product => {
-      const findProductCampaign = await this.campaignsProductsRepository.findByCampaignIdAndProductId(
-        {
-          product_id: product.id,
-          campaign_id: campaign.id
-        }
-      );
-
-      if (findProductCampaign) {
-        return;
-      }
-
       const findProduct = await this.productsRepository.findById(product.id);
 
       if (findProduct) {

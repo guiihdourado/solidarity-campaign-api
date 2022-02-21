@@ -8,11 +8,6 @@ let fakeCampaignsRepository: FakeCampaignsRepository;
 let fakeCampaignsProductsRepository: FakeCampaignsProductsRepository;
 let createCampaign: CreateCampaignService;
 
-const spyFindByCampaignIdAndProductId = jest.spyOn(
-  FakeCampaignsProductsRepository.prototype,
-  'findByCampaignIdAndProductId'
-);
-
 const spyCampaignsProductsRepositoryCreate = jest.spyOn(
   FakeCampaignsProductsRepository.prototype,
   'create'
@@ -34,20 +29,30 @@ describe('CreateCampaign', () => {
   });
 
   it('should be able to create a campaign', async () => {
+    const product1 = await fakeProductsRepository.create({
+      name: 'Arroz'
+    });
+    const product2 = await fakeProductsRepository.create({
+      name: 'Feijão'
+    });
+    const product3 = await fakeProductsRepository.create({
+      name: 'Macarrão'
+    });
+
     const response = await createCampaign.execute({
       name: 'Campanha Teste',
       available_value: 3000,
       products: [
         {
-          id: '1',
+          id: product1.id,
           quantity_we_have: 2
         },
         {
-          id: '2',
+          id: product2.id,
           quantity_we_have: 3
         },
         {
-          id: '3',
+          id: product3.id,
           quantity_we_have: 4
         }
       ]
@@ -60,8 +65,7 @@ describe('CreateCampaign', () => {
       available_value: 3000
     });
 
-    expect(spyFindByCampaignIdAndProductId).toHaveBeenCalledTimes(3);
     expect(spyFindById).toHaveBeenCalledTimes(3);
-    expect(spyCampaignsProductsRepositoryCreate).toHaveBeenCalledTimes(0);
+    expect(spyCampaignsProductsRepositoryCreate).toHaveBeenCalledTimes(3);
   });
 });
